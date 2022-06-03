@@ -15,16 +15,16 @@ int main()
     setlocale(LC_ALL, "RU");
     srand(time(NULL));
 
-	Smart_Player p1("lol", 'x');
+	Smart_Player* p1 = new Smart_Player("lol", 'x');
 
-	//cout << p1.Get_Print();
+	cout << p1->Get_Print();
 
-	vector<Player> players;
+	vector<Player*> players;
 
 	players.push_back(p1);
 
 
-	cout << players[0].Get_Print();
+	cout << players[0]->Get_Print();
  //   Board b(5, 5, '-');
 	//Game g(b);
 	//
