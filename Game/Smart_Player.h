@@ -1,25 +1,17 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include "Point.h"
-#include "Board.h"
-#include <time.h>
+#include "Player.h"
 
 using namespace std;
 
-class Smart_Player
+class Smart_Player : public Player
 {
-private:
-	std::string m_name;
-	char m_sign;//знак
-public:
-	Smart_Player(string name, char sign) : m_name(name), m_sign(sign) {};
-	Smart_Player() {};
 
-	std::string GetName();
-	char GetSign();
-	Point CreateMove(Board);
-	void DeletePlayer();
+public:
+	Smart_Player(std::string name, char sign) : Player(name, sign) {}; // имя и значок игрока
+	Smart_Player() {}; // конструктор по умолчанию 
+	Smart_Player(const Smart_Player&);// конструктор копирования
+	string Get_Print() ;
+	Point CreateMove(Board) ;
 
 
 };

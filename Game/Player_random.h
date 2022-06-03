@@ -1,25 +1,19 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include "Point.h"
-#include "Board.h"
+#include "Player.h"
 
 using namespace std;
 
-class Player_random
+class Player_random : public Player
 {
-private:
-	std::string m_name;
-	char m_sign;//знак
-public:
 
-	Player_random(std::string name, char sign) : m_name(name), m_sign(sign) {}; // им€ и значок игрока
+public:
+	Player_random(std::string name, char sign) : Player(name,sign) {}; // им€ и значок игрока
 	Player_random() {}; // конструктор по умолчанию 
-	Player_random(const Player_random&);
-	std::string GetName();
-	char GetSign();
-	Point CreateMove(Board);
-	void DeletePlayer();
+
+
+	Player_random(const Player_random&);// конструктор копировани€
+	string Get_Print() ;
+	Point CreateMove(Board) ;
 
 
 

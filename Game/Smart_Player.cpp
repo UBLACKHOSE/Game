@@ -1,16 +1,16 @@
+#pragma once
 #include "Smart_Player.h"
 
-string Smart_Player::GetName()
-{
 
-	return m_name;
+string Smart_Player::Get_Print() {
+	string str;
+	str.append("\nУмный игрок.Имя:");
+	str.append(m_name);
+	str.append("Знак:");
+	str.append(string(1,m_sign));
+	str.append("\n");
+	return str;
 }
-
-char Smart_Player::GetSign()
-{
-	return m_sign;
-}
-
 
 Point Smart_Player::CreateMove(Board b)
 {
@@ -159,9 +159,4 @@ Point Smart_Player::CreateMove(Board b)
 	}
 	return p;
 
-}
-
-void Smart_Player::DeletePlayer() {
-	m_name = "";
-	m_sign = '\0';
 }

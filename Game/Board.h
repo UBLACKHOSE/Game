@@ -1,5 +1,6 @@
 #pragma once
 #include "Point.h"
+#include <vector>
 
 class Board
 {
@@ -11,13 +12,13 @@ public:
 		this->Sign_null = '-';
 		m_Size_x = 0;
 		m_Size_y = 0;
-		m_Matrix = new char* [m_Size_x];
-		for (int i = 0; i < m_Size_x; i++) {
-			m_Matrix[i] = new char[m_Size_y];
-			for (int j = 0; j < m_Size_y; j++) {
 
-				m_Matrix[i][j] = Sign_null;
+		for (int i = 0; i < m_Size_x; i++) {
+			std::vector<char> buf (m_Size_x);
+			for (int j = 0; j < m_Size_y; j++) {
+				buf.push_back(Sign_null);
 			}
+			m_Matrix.push_back(buf);
 		}
 	}
 
@@ -27,13 +28,13 @@ public:
 		// заполнили объект введенными значениями 
 		m_Size_x = Size_x;
 		m_Size_y = Size_y;
-		m_Matrix = new char* [m_Size_x];
-		for (int i = 0; i < Size_y; i++) {
-			m_Matrix[i] = new char[m_Size_y];
-			for (int j = 0; j < Size_x; j++) {
 
-				m_Matrix[i][j] = Sign_null; // заполняем знаком нуля
+		for (int i = 0; i < m_Size_x; i++) {
+			std::vector<char> buf(m_Size_x);
+			for (int j = 0; j < m_Size_y; j++) {
+				buf.push_back(Sign_null);
 			}
+			m_Matrix.push_back(buf);
 		}
 
 	}
@@ -48,7 +49,7 @@ public:
 	void ClearBoard();
 
 private:
-	char** m_Matrix;
+	std::vector<std::vector<char>> m_Matrix;
 	int m_Size_x, m_Size_y; // СВОЙСТВА КЛАССА
 	char Sign_null;
 };

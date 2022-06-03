@@ -7,20 +7,8 @@ Player_random::Player_random(const Player_random& PR)
 	m_sign = PR.m_sign;
 }
 
-string Player_random::GetName() {
 
-	return m_name;
-
-}
-
-
-char Player_random::GetSign()
-{
-	return m_sign;
-}
-
-
-Point Player_random::CreateMove(Board b) {
+Point Player_random::CreateMove(Board b)  {
 	int x, y;
 	x = rand() % b.Get_Width();
 	y = rand() % b.Get_Height();
@@ -36,8 +24,12 @@ Point Player_random::CreateMove(Board b) {
 	return p;
 }
 
-
-void Player_random::DeletePlayer() {
-	m_name = "";
-	m_sign = '\0';
+string Player_random::Get_Print() {
+	string str;
+	str.append("\nРандомный игрок.Имя:");
+	str.append(m_name);
+	str.append("Знак:");
+	str.append(string(1,m_sign));
+	str.append("\n");
+	return str;
 }
