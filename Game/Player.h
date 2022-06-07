@@ -15,7 +15,7 @@ public:
 
 	std::string GetName();
 	char GetSign();
-	virtual Point CreateMove(Board) = 0;
+	virtual Point CreateMove(std::shared_ptr<Board>) = 0;
 	virtual string Get_Print() = 0;
 public:
 	std::string m_name;

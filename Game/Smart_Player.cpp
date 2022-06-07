@@ -12,15 +12,15 @@ string Smart_Player::Get_Print() {
 	return str;
 }
 
-Point Smart_Player::CreateMove(Board b)
+Point Smart_Player::CreateMove(std::shared_ptr<Board> b)
 {
 	bool flag = false; // для определения одинакового знака игрока на поле
 	Point p(1, 1);
-	for (int i = 0; i < b.Get_Height(); i++)
+	for (int i = 0; i < b->Get_Height(); i++)
 	{
-		for (int j = 0; j < b.Get_Width(); j++) {
+		for (int j = 0; j < b->Get_Width(); j++) {
 			p.Set_Coordinate(i, j);
-			if (this->GetSign() == b.Get_Condition(p)) { // сравниваем знак игрока со знаком на поле
+			if (this->GetSign() == b->Get_Condition(p)) { // сравниваем знак игрока со знаком на поле
 				flag = true;
 				break;
 			}
@@ -32,14 +32,14 @@ Point Smart_Player::CreateMove(Board b)
 
 	if (!flag) {
 		int x, y;
-		x = rand() % b.Get_Width();
-		y = rand() % b.Get_Height();
+		x = rand() % b->Get_Width();
+		y = rand() % b->Get_Height();
 		Point p(x, y);
 		// пока не находим пустую ячейку ставим рандом 
-		while (!b.Is_Condition_Cell(p))
+		while (!b->Is_Condition_Cell(p))
 		{
-			x = rand() % b.Get_Width();
-			y = rand() % b.Get_Height();
+			x = rand() % b->Get_Width();
+			y = rand() % b->Get_Height();
 			p.Set_Coordinate(x, y);
 		}
 		return p;
@@ -56,7 +56,7 @@ Point Smart_Player::CreateMove(Board b)
 					continue;
 				}
 
-				if (i < 0 || j < 0 || i > b.Get_Width() || j > b.Get_Height()) { // границы поля 
+				if (i < 0 || j < 0 || i > b->Get_Width() || j > b->Get_Height()) { // границы поля 
 					continue;
 				}
 
@@ -65,7 +65,7 @@ Point Smart_Player::CreateMove(Board b)
 				p_tmp.Set_Coordinate(i, j);
 
 
-				if (this->GetSign() == b.Get_Condition(p_tmp)) { // если нашли одинаковый знак вокруг точки
+				if (this->GetSign() == b->Get_Condition(p_tmp)) { // если нашли одинаковый знак вокруг точки
 					Point p_erv(p.x, p.y);
 					// если они лежат по вертикале то у них совпадают х
 					if (p_tmp.x == p.x) {
@@ -73,11 +73,11 @@ Point Smart_Player::CreateMove(Board b)
 						if (p_tmp.y + 1 == p.y) {
 							// проверка для пустой ячейки сверху
 							p_erv.Set_Coordinate(p_tmp.x, p_tmp.y - 1);
-							if (b.Is_Condition_Cell(p_erv)) {
+							if (b->Is_Condition_Cell(p_erv)) {
 								return p_erv;
 							}
 							p_erv.Set_Coordinate(p.x, p.y + 1);
-							if (b.Is_Condition_Cell(p_erv)) {
+							if (b->Is_Condition_Cell(p_erv)) {
 								return p_erv;
 							}
 						}
@@ -85,11 +85,11 @@ Point Smart_Player::CreateMove(Board b)
 						else if (p_tmp.y - 1 == p.y) {
 
 							p_erv.Set_Coordinate(p_tmp.x, p_tmp.y + 1);
-							if (b.Is_Condition_Cell(p_erv)) {
+							if (b->Is_Condition_Cell(p_erv)) {
 								return p_erv;
 							}
 							p_erv.Set_Coordinate(p.x, p.y - 1);
-							if (b.Is_Condition_Cell(p_erv)) {
+							if (b->Is_Condition_Cell(p_erv)) {
 								return p_erv;
 							}
 
@@ -99,11 +99,11 @@ Point Smart_Player::CreateMove(Board b)
 						if (p_tmp.x + 1 == p.x) {
 							// проверка для пустой ячейки слева
 							p_erv.Set_Coordinate(p_tmp.x - 1, p_tmp.y);
-							if (b.Is_Condition_Cell(p_erv)) {
+							if (b->Is_Condition_Cell(p_erv)) {
 								return p_erv;
 							}
 							p_erv.Set_Coordinate(p.x + 1, p.y);
-							if (b.Is_Condition_Cell(p_erv)) {
+							if (b->Is_Condition_Cell(p_erv)) {
 								return p_erv;
 							}
 						}
@@ -111,11 +111,11 @@ Point Smart_Player::CreateMove(Board b)
 						else if (p_tmp.x - 1 == p.x) {
 
 							p_erv.Set_Coordinate(p_tmp.x + 1, p_tmp.y);
-							if (b.Is_Condition_Cell(p_erv)) {
+							if (b->Is_Condition_Cell(p_erv)) {
 								return p_erv;
 							}
 							p_erv.Set_Coordinate(p.x - 1, p.y);
-							if (b.Is_Condition_Cell(p_erv)) {
+							if (b->Is_Condition_Cell(p_erv)) {
 								return p_erv;
 							}
 
@@ -126,35 +126,35 @@ Point Smart_Player::CreateMove(Board b)
 		}
 		// если мы не нашли рядом с ним одинакового знака и добавляем знак
 		p_tmp.Set_Coordinate(p.x - 1, p.y);
-		if (b.Is_Condition_Cell(p_tmp)) {
+		if (b->Is_Condition_Cell(p_tmp)) {
 			return p_tmp;
 		}
 
 		p_tmp.Set_Coordinate(p.x + 1, p.y);
-		if (b.Is_Condition_Cell(p_tmp)) {
+		if (b->Is_Condition_Cell(p_tmp)) {
 			return p_tmp;
 		}
 
 		p_tmp.Set_Coordinate(p.x, p.y + 1);
-		if (b.Is_Condition_Cell(p_tmp)) {
+		if (b->Is_Condition_Cell(p_tmp)) {
 			return p_tmp;
 		}
 
 		p_tmp.Set_Coordinate(p.x, p.y - 1);
-		if (b.Is_Condition_Cell(p_tmp)) {
+		if (b->Is_Condition_Cell(p_tmp)) {
 			return p_tmp;
 		}
 	}
 
 	int x, y;
-	x = rand() % b.Get_Width();
-	y = rand() % b.Get_Height();
+	x = rand() % b->Get_Width();
+	y = rand() % b->Get_Height();
 	p.Set_Coordinate(x, y);
 
-	while (!b.Is_Condition_Cell(p))
+	while (!b->Is_Condition_Cell(p))
 	{
-		x = rand() % b.Get_Width();
-		y = rand() % b.Get_Height();
+		x = rand() % b->Get_Width();
+		y = rand() % b->Get_Height();
 		p.Set_Coordinate(x, y);
 	}
 	return p;

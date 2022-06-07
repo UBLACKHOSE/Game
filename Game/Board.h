@@ -14,7 +14,7 @@ public:
 		m_Size_y = 0;
 
 		for (int i = 0; i < m_Size_x; i++) {
-			std::vector<char> buf (m_Size_x);
+			std::vector<char> buf ;
 			for (int j = 0; j < m_Size_y; j++) {
 				buf.push_back(Sign_null);
 			}
@@ -30,7 +30,7 @@ public:
 		m_Size_y = Size_y;
 
 		for (int i = 0; i < m_Size_x; i++) {
-			std::vector<char> buf(m_Size_x);
+			std::vector<char> buf;
 			for (int j = 0; j < m_Size_y; j++) {
 				buf.push_back(Sign_null);
 			}

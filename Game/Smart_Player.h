@@ -11,7 +11,7 @@ public:
 	Smart_Player() {}; // конструктор по умолчанию 
 	Smart_Player(const Smart_Player&);// конструктор копирования
 	string Get_Print() ;
-	Point CreateMove(Board) ;
+	Point CreateMove(std::shared_ptr<Board>) ;
 
 
 };

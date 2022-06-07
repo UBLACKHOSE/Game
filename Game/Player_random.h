@@ -13,7 +13,7 @@ public:
 
 	Player_random(const Player_random&);// конструктор копирования
 	string Get_Print() ;
-	Point CreateMove(Board) ;
+	Point CreateMove(std::shared_ptr <Board>) ;
 
 
 

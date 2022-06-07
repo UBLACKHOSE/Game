@@ -8,16 +8,16 @@ Player_random::Player_random(const Player_random& PR)
 }
 
 
-Point Player_random::CreateMove(Board b)  {
+Point Player_random::CreateMove(std::shared_ptr<Board> b)  {
 	int x, y;
-	x = rand() % b.Get_Width();
-	y = rand() % b.Get_Height();
+	x = rand() % b->Get_Width();
+	y = rand() % b->Get_Height();
 	Point p(x, y);
 
-	while (!b.Is_Condition_Cell(p)) // Проверка на пустую ячейку
+	while (!b->Is_Condition_Cell(p)) // Проверка на пустую ячейку
 	{
-		x = rand() % b.Get_Width();
-		y = rand() % b.Get_Height();
+		x = rand() % b->Get_Width();
+		y = rand() % b->Get_Height();
 		p.Set_Coordinate(x, y);
 	}
 
